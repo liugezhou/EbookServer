@@ -1,14 +1,16 @@
 const express = require('express')
 const boom = require('boom')
 const userRouter = require('./user')
+const jwtAuth = require('./jwt')
+const Result = require('../models/Result')
+
+const router = express.Router()
+router.use(jwtAuth)
 
 const {
     CODE_ERROR
   } = require('../utils/constant')
   
-  // 注册路由
-  const router = express.Router()
-
   router.get('/',function(req,res){
       res.send('Hello World!')
   })
@@ -29,14 +31,19 @@ const {
  * 第二，方法的必须放在路由最后
  */
 router.use((err, req, res, next) => {
+  if (err.name === 'UnauthorizedError') {
+    new Result(null, 'token失效', {
+      error: err.status,
+      errorMsg: err.name
+    }).expired(res.status(err.status))
+  } else {
     const msg = (err && err.message) || '系统错误'
     const statusCode = (err.output && err.output.statusCode) || 500;
     const errorMsg = (err.output && err.output.payload && err.output.payload.error) || err.message
-    res.status(statusCode).json({
-      code: CODE_ERROR,
-      msg,
+    new Result(null, msg, {
       error: statusCode,
       errorMsg
-    })
-  })
+    }).fail(res.status(statusCode))
+  }
+})
   module.exports = router
