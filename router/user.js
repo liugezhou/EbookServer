@@ -44,8 +44,6 @@ router.get('/info', function (req, res) {
         new Result('获取用户信息失败').fail(res)
       }
     })
-  } else {
-    new Result('用户信息解析失败').fail(res)
   }
 })
 

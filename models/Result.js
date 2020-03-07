@@ -52,7 +52,7 @@ const {
       this.json(res)
     }
 
-    expired(res) {
+    jwterror(res) {
       this.code = CODE_TOKEN_EXPIRED
       this.json(res)
     }

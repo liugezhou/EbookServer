@@ -10,10 +10,6 @@ router.use(jwtAuth)
 const {
     CODE_ERROR
   } = require('../utils/constant')
-  
-  router.get('/',function(req,res){
-      res.send('Hello World!')
-  })
 
   router.use('/user',userRouter)
   /**
@@ -35,7 +31,7 @@ router.use((err, req, res, next) => {
     new Result(null, 'token失效', {
       error: err.status,
       errorMsg: err.name
-    }).expired(res.status(err.status))
+    }).jwterror(res.status(err.status))
   } else {
     const msg = (err && err.message) || '系统错误'
     const statusCode = (err.output && err.output.statusCode) || 500;
