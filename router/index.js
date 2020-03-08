@@ -1,6 +1,7 @@
 const express = require('express')
 const boom = require('boom')
 const userRouter = require('./user')
+const bookRouter = require('./book')
 const jwtAuth = require('./jwt')
 const Result = require('../models/Result')
 
@@ -12,6 +13,7 @@ const {
   } = require('../utils/constant')
 
   router.use('/user',userRouter)
+  router.use('/book',bookRouter)
   /**
    * 集中处理404请求的中间件
    * 注意：该中间件必须放在正常处理流程之后
