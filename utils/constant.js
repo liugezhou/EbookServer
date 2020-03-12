@@ -1,8 +1,8 @@
 const { env } = require('./env')
 
-const UPLOAD_PATH = env === 'dev' ? '/Users/liumingzhou/Desktop/upload' : '/root/ebbokuplod/book'
+const UPLOAD_PATH = env === 'dev' ? '/Users/liumingzhou/Desktop/upload' : '/root/ebbokuplod/'
 
-const UPLOAD_URL = env === 'dev' ? 'http://el.liugezhou.online:8080/upload/book' : 'http://el.liugezhou.online:8080/root/ebbokuplod/book'
+const UPLOAD_URL = env === 'dev' ? 'http://el.liugezhou.online:8080/upload' : 'http://el.liugezhou.online:8080/root/ebbokuplod/'
 
 module.exports = {
     CODE_ERROR: -1,
