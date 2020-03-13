@@ -19,7 +19,6 @@ const {
     }
   
     createBookFromFile(file) {
-      // console.log('createBookFromFile', file)
       const {
         destination,
         filename,
@@ -293,6 +292,7 @@ const {
       if (+book.updateType === 0) {
         if (cover) {
           if (cover.startsWith('/')) {
+            //OLD_UPLOAD_URL 本项目未定义，不会走到这里
             return `${OLD_UPLOAD_URL}${cover}`
           } else {
             return `${OLD_UPLOAD_URL}/${cover}`

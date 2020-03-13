@@ -13,7 +13,12 @@ function decode(req) {
     }
     return jwt.verify(token, PRIVATE_KEY)
   }
+
+function isObject(o){
+  return Object.prototype.toString.call(o) === '[object Object]'
+}  
 module.exports = {
     md5,
-    decode
+    decode,
+    isObject
 }
