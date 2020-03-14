@@ -68,4 +68,20 @@ router.post('/updateBook', function (req, res, next) {
         next(boom.badImplementation(e))
     })
 })
+
+router.get('/category', function (req, res, next) {
+    bookService.getcategory().then((result) => {
+        new Result(result,'查询分类成功').success(res)
+    }).catch(e => {
+        next(boom.badImplementation(e))
+    })
+})
+
+router.get('/list', function (req, res, next) {
+    bookService.listBook(req.query).then(({list}) => {
+        new Result({list},'查询图书成功成功').success(res)
+    }).catch(e => {
+        next(boom.badImplementation(e))
+    })
+})
 module.exports = router

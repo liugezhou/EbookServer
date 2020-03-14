@@ -14,7 +14,7 @@ function connect() {
 
 function querySql(sql) {
     const conn = connect()
-    // debug && console.log('查询的sql为：' + sql)
+    debug && console.log('查询的sql为：' + sql)
     return new Promise((resolve, reject) => {
         try {
             conn.query(sql, (err, results) => {
@@ -121,9 +121,27 @@ function update(model,tabelName,where){
         }
     })
 }
+
+function and(where,k,v){
+    if(where === 'where'){
+        return `${where} \`${k}\`='${v}'`
+    }else{
+        return `${where} and \`${k}\`='${v}'`
+    }
+}
+
+function andLike(where,k,v){
+    if(where === 'where'){
+        return `${where} \`${k}\` like '%${v}%'`
+    }else{
+        return `${where} and \`${k}\` like '%${v}%'`
+    }
+}
 module.exports = {
     querySql,
     queryOne,
     insert,
-    update
+    update,
+    and,
+    andLike
 }
