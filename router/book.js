@@ -78,8 +78,16 @@ router.get('/category', function (req, res, next) {
 })
 
 router.get('/list', function (req, res, next) {
-    bookService.listBook(req.query).then(({list}) => {
-        new Result({list},'查询图书成功成功').success(res)
+    bookService.listBook(req.query).then(({list,count,page,pageSize}) => {
+        new Result({list,count,page:+page,pageSize:+pageSize},'查询图书成功成功').success(res)
+    }).catch(e => {
+        next(boom.badImplementation(e))
+    })
+})
+router.get('/delete', function (req, res, next) {
+    const {fileName} = req.query
+    bookService.deleteBook(fileName).then(() => {
+        new Result('电子书删除成功').success(res)
     }).catch(e => {
         next(boom.badImplementation(e))
     })

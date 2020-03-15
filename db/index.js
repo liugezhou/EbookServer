@@ -130,6 +130,7 @@ function and(where,k,v){
     }
 }
 
+//TODO:test something
 function andLike(where,k,v){
     if(where === 'where'){
         return `${where} \`${k}\` like '%${v}%'`
